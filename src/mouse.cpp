@@ -22,9 +22,11 @@ void Mouse::update(const Verly& verly) {
   }
 
   if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
-    this->dragPoint->color = RED;
-    this->dragPoint->pinned = false;
-    this->dragPoint = nullptr;
+    if (this->dragPoint != nullptr)  {
+      this->dragPoint->color = RED;
+      this->dragPoint->pinned = false;
+      this->dragPoint = nullptr;
+    }
   }
 }
 
