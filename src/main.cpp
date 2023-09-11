@@ -10,6 +10,8 @@ int main() {
 	const int screenWidth = 1200;
 	const int screenHeight = 450;
 
+	SetConfigFlags(FLAG_MSAA_4X_HINT | FLAG_WINDOW_HIGHDPI);
+
 	raylib::Window window(screenWidth, screenHeight, "Verly window");
 	SetTargetFPS(60);
 
