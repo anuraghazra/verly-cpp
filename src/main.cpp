@@ -8,26 +8,28 @@
 
 int main() {
 	const int screenWidth = 1200;
-	const int screenHeight = 450;
+	const int screenHeight = 700;
 
 	SetConfigFlags(FLAG_MSAA_4X_HINT | FLAG_WINDOW_HIGHDPI);
 
 	raylib::Window window(screenWidth, screenHeight, "Verly window");
-	SetTargetFPS(60);
+	SetTargetFPS(120);
 
 	Verly verly = Verly();
 	Mouse mouse = Mouse();
 	auto box = Verly::createBox(100, 100, 100, 100);
+	auto rope = Verly::createRope(200, 30, 10, 30, true);
 
 	verly.addEntity(box);
+	verly.addEntity(rope);
 
 	while (!WindowShouldClose()) {
-		box->update();
 		mouse.update(verly);
+		verly.update();
 
 		BeginDrawing();
 		ClearBackground(Color{ 245, 245, 245, 255 });
-		box->draw();
+		verly.draw();
 		EndDrawing();
 	}
 

@@ -6,7 +6,7 @@
 Entity::Entity() {
   this->points = {};
   this->sticks = {};
-  this->iterations = 16;
+  this->iterations = 50;
 }
 
 void Entity::addPoint(std::shared_ptr<Particle> point) {
@@ -39,7 +39,7 @@ void Entity::draw() {
   for (int k = 0; k < this->sticks.size(); k++)  {
     this->sticks.at(k)->draw();
   }
-  this->drawPointIndices();
+  // this->drawPointIndices();
 }
 
 void Entity::drawPointIndices() {

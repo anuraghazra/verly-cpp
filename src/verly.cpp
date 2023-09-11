@@ -22,6 +22,26 @@ void Verly::draw() {
   }
 }
 
+std::shared_ptr<Entity> Verly::createRope(int x, int y, int segments, int gap, bool pin) {
+	auto rope = std::make_shared<Entity>();
+
+	for (int i = 0; i < segments; i++) {
+		auto p1 = std::make_shared<Particle>(x + i * gap, y);
+		rope->addPoint(p1);
+	}
+
+	for (int i = 0; i < segments - 1; i++) {
+		auto joint1 = std::make_shared<Stick>(rope->points.at(i), rope->points.at((i + 1) % segments));
+		rope->addStick(joint1);
+	}
+
+	if (pin == true) {
+		rope->points.at(0)->pinned = true;
+	}
+
+	return rope;
+}
+
 std::shared_ptr<Entity> Verly::createBox(int x, int y, int w, int h) {
 	auto box = std::make_shared<Entity>();
 	
