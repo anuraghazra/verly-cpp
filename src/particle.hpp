@@ -7,13 +7,11 @@ class Stick;
 class Particle {
 public:
 	Particle(float x, float y);
-	~Particle() {
-		std::cout << "Particle Destroy" << "\n";
-	}
 
 	raylib::Vector2 pos;
 	raylib::Vector2 oldPos;
 	raylib::Vector2 gravity;
+	raylib::Color color;
 	bool pinned;
 	float mass;
 	float bounce;

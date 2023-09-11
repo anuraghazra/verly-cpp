@@ -12,6 +12,7 @@ Particle::Particle(float x, float y) {
 	this->oldPos = raylib::Vector2(this->pos.x, this->pos.y);
 	this->gravity = raylib::Vector2(0, 1);
 	this->pinned = false;
+	this->color = RED;
 	// this->sticks = {};
 }
 
@@ -56,5 +57,5 @@ void Particle::applyForce(raylib::Vector2 force) {
 }
 
 void Particle::draw() {
-	DrawCircleV(this->pos, this->radius, Color{255, 0, 0, 255});
+	DrawCircleV(this->pos, this->radius, this->color);
 }
