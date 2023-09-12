@@ -34,5 +34,5 @@ void Stick::update() {
 }
 
 void Stick::draw() {
-	DrawLineV(this->startPoint->pos, this->endPoint->pos, Color{ 0,0,0,255 });
+	DrawLineV(this->startPoint->pos, this->endPoint->pos, Color{112, 128, 144, 255});
 }

@@ -19,9 +19,11 @@ int main() {
 	Mouse mouse = Mouse();
 	auto box = Verly::createBox(100, 100, 100, 100);
 	auto rope = Verly::createRope(200, 30, 10, 30, true);
+	auto cloth = Verly::createCloth(500, 100, 400, 400, 20, 2);
 
 	verly.addEntity(box);
 	verly.addEntity(rope);
+	verly.addEntity(cloth);
 
 	while (!WindowShouldClose()) {
 		mouse.update(verly);

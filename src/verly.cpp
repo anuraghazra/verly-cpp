@@ -42,6 +42,41 @@ std::shared_ptr<Entity> Verly::createRope(int x, int y, int segments, int gap, b
 	return rope;
 }
 
+std::shared_ptr<Entity> Verly::createCloth(int posx, int posy, int w, int h, int segments, int pinOffset) {
+	auto cloth = std::make_shared<Entity>();
+
+	int xStride = w / segments;
+	int yStride = h / segments;
+
+	for (int y = 0; y < segments; ++y) {
+		for (int x = 0; x < segments; ++x) {
+			int px = posx + x * xStride - w / 2 + xStride / 2;
+			int py = posy + y * yStride - h / 2 + yStride / 2;
+			auto p = std::make_shared<Particle>(px, py);
+			cloth->addPoint(p);
+
+			if (x > 0) {
+				auto stickX = std::make_shared<Stick>(cloth->points.at(y * segments + x),cloth->points.at( y * segments + x - 1));
+				cloth->addStick(stickX);
+			}
+
+			if (y > 0) {
+				auto stickY = std::make_shared<Stick>(cloth->points.at(y * segments + x), cloth->points.at((y - 1) * segments + x));
+				cloth->addStick(stickY);
+			}
+		}
+	}
+
+	// pin points at segmented intervals 
+	for (int x = 0; x < segments; ++x) {
+		if (x % pinOffset == 0) {
+			cloth->points.at(x)->pinned = true;
+		}
+	}
+
+	return cloth;
+}
+
 std::shared_ptr<Entity> Verly::createBox(int x, int y, int w, int h) {
 	auto box = std::make_shared<Entity>();
 	
