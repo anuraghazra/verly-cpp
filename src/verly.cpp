@@ -1,6 +1,7 @@
 #include "entity.hpp"
 #include "particle.hpp"
 #include "verly.hpp"
+#include <cmath>
 
 Verly::Verly() {
   this->entities = {};
@@ -40,6 +41,33 @@ std::shared_ptr<Entity> Verly::createRope(int x, int y, int segments, int gap, b
 	}
 
 	return rope;
+}
+
+std::shared_ptr<Entity> Verly::createHexagon(int x, int y, int segments, int radius, int stride1, int stride2) {
+	auto hexagon = std::make_shared<Entity>();
+	float stride = (2 * PI) / segments;
+
+	// points
+	for (int i = 0; i < segments; ++i) {
+		float theta = i * stride;
+		auto p = std::make_shared<Particle>(x + cos(theta) * radius, y + sin(theta) * radius);
+		hexagon->addPoint(p);
+	}
+
+	auto center = std::make_shared<Particle>(x, y);
+	hexagon->addPoint(center);
+
+	// sticks
+	for (int i = 0; i < segments; ++i) {
+		auto stick1 = std::make_shared<Stick>(hexagon->points.at(i), hexagon->points.at((i + stride1) % segments));
+		auto stick2 = std::make_shared<Stick>(hexagon->points.at(i), center);
+		auto stick3 = std::make_shared<Stick>(hexagon->points.at(i), hexagon->points.at((i + stride2) % segments));
+		hexagon->addStick(stick1);
+		hexagon->addStick(stick2);
+		hexagon->addStick(stick3);
+	}
+
+	return hexagon;
 }
 
 std::shared_ptr<Entity> Verly::createCloth(int posx, int posy, int w, int h, int segments, int pinOffset) {

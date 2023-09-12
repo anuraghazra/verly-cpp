@@ -1,0 +1,12 @@
+{
+  "tasks": [
+    {
+      "type": "shell",
+      "label": "Build & Run Verly",
+      "command": "mingw32-make bin/app && mingw32-make execute",
+      "group": "build",
+      "detail": "Build & Run Verly"
+    },
+  ],
+  "version": "2.0.0"
+}
