@@ -1,6 +1,7 @@
 #pragma once
 #include <raylib-cpp.hpp>
 #include <iostream>
+#include <memory>
 
 class Stick;
 
@@ -18,7 +19,7 @@ public:
 	float friction;
 	float groundFriction;
 	int radius;
-	std::vector<Stick*> sticks;
+	std::vector<std::shared_ptr<Stick>> sticks;
 
 	void applyForce(raylib::Vector2 force);
 	void update();

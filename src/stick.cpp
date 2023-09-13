@@ -1,12 +1,18 @@
+#include "constants.hpp"
 #include "stick.hpp"
 #include <memory>
 
 Stick::Stick(std::shared_ptr<Particle> p1, std::shared_ptr<Particle> p2) : startPoint(p1), endPoint(p2) {
 	this->length = this->startPoint->pos.Distance((this->endPoint)->pos);
 	this->stiffness = 0.97;
+	this->color = STICK_COLOR;
+}
 
-	this->startPoint->sticks.push_back(this);
-	this->endPoint->sticks.push_back(this);
+// shared_from_this cannot be called inside constructor since the weakpointer won't be created at that time
+// This makes the API of creating Sticks weird, need to figure out a better option
+void Stick::Init() {
+	this->startPoint->sticks.push_back(shared_from_this());
+	this->endPoint->sticks.push_back(shared_from_this());
 }
 
 void Stick::update() {
@@ -34,5 +40,5 @@ void Stick::update() {
 }
 
 void Stick::draw() {
-	DrawLineV(this->startPoint->pos, this->endPoint->pos, Color{155, 71, 126, 155});
+	DrawLineV(this->startPoint->pos, this->endPoint->pos, this->color);
 }

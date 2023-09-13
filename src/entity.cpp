@@ -1,12 +1,14 @@
+#include "constants.hpp"
 #include "entity.hpp"
 #include "particle.hpp"
 #include "stick.hpp"
 #include <memory>
+#include <algorithm>
 
 Entity::Entity() {
   this->points = {};
   this->sticks = {};
-  this->iterations = 20;
+  this->iterations = VERLY_ITERATIONS;
 }
 
 void Entity::addPoint(std::shared_ptr<Particle> point) {
@@ -14,6 +16,8 @@ void Entity::addPoint(std::shared_ptr<Particle> point) {
 }
 
 void Entity::addStick(std::shared_ptr<Stick> stick) {
+  // TODO: fix
+  stick->Init();
   this->sticks.push_back(stick);
 }
 

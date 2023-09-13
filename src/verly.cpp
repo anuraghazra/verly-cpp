@@ -2,6 +2,7 @@
 #include "particle.hpp"
 #include "verly.hpp"
 #include <cmath>
+#include <algorithm>
 
 Verly::Verly() {
   this->entities = {};
@@ -9,6 +10,23 @@ Verly::Verly() {
 
 void Verly::addEntity(std::shared_ptr<Entity> entity) {
   this->entities.push_back(entity);
+}
+
+void Verly::removePoint(std::shared_ptr<Particle> point, std::shared_ptr<Entity> hoveredEntity) {
+	// find which entity this point belongs to
+
+	// do the rest
+  for (int i = 0; i < point->sticks.size(); i++) {
+    auto s = point->sticks.at(i);
+    auto idx = std::find(hoveredEntity->sticks.begin(), hoveredEntity->sticks.end(), s);
+		if (idx != hoveredEntity->sticks.end()) {
+	    hoveredEntity->sticks.erase(idx);
+		}
+  }
+  auto idx = std::find(hoveredEntity->points.begin(), hoveredEntity->points.end(), point);
+	if (idx != hoveredEntity->points.end()) {
+		hoveredEntity->points.erase(idx);
+	}
 }
 
 void Verly::update() {

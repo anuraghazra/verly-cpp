@@ -1,3 +1,4 @@
+#include "constants.hpp"
 #include "particle.hpp"
 #include <raylib-cpp.hpp>
 #include <iostream>
@@ -12,7 +13,7 @@ Particle::Particle(float x, float y) {
 	this->oldPos = raylib::Vector2(this->pos.x, this->pos.y);
 	this->gravity = raylib::Vector2(0, 1);
 	this->pinned = false;
-	this->color = Color{255, 71, 126, 255};
+	this->color = PARTICLE_COLOR;
 }
 
 void Particle::update() {

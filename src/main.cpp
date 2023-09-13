@@ -28,8 +28,14 @@ int main() {
 	verly.addEntity(heaxgon);
 
 	while (!WindowShouldClose()) {
+  	if (IsKeyDown(KEY_DELETE)) {
+			if (mouse.dragPoint != nullptr)  {
+				verly.removePoint(mouse.dragPoint, mouse.hoveredEntity);		
+			}
+		}
 		mouse.update(verly);
 		verly.update();
+
 
 		BeginDrawing();
 		ClearBackground(Color{ 245, 245, 245, 255 });
