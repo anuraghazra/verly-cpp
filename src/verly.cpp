@@ -3,6 +3,7 @@
 #include "verly.hpp"
 #include <cmath>
 #include <algorithm>
+#include "instrumentor.hpp"
 
 Verly::Verly() {
   this->entities = {};
@@ -30,12 +31,15 @@ void Verly::removePoint(std::shared_ptr<Particle> point, std::shared_ptr<Entity>
 }
 
 void Verly::update() {
+	PROFILE_FUNCTION();
   for (int i = 0; i < this->entities.size(); i++) {
     this->entities.at(i)->update();
   }
 }
 
 void Verly::draw() {
+	PROFILE_FUNCTION();
+
   for (int i = 0; i < this->entities.size(); i++) {
     this->entities.at(i)->draw();
   }

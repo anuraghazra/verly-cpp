@@ -4,6 +4,7 @@
 #include "stick.hpp"
 #include <memory>
 #include <algorithm>
+#include "instrumentor.hpp"
 
 Entity::Entity() {
   this->points = {};
@@ -22,6 +23,7 @@ void Entity::addStick(std::shared_ptr<Stick> stick) {
 }
 
 void Entity::update() {
+  PROFILE_FUNCTION();
   for (int m = 0; m < this->points.size(); m++)  {
     this->points.at(m)->update();
   }
@@ -37,9 +39,9 @@ void Entity::update() {
 }
 
 void Entity::draw() {
-  for (int i = 0; i < this->points.size(); i++)  {
-    this->points.at(i)->draw();
-  }
+  // for (int i = 0; i < this->points.size(); i++)  {
+  //   this->points.at(i)->draw();
+  // }
   for (int k = 0; k < this->sticks.size(); k++)  {
     this->sticks.at(k)->draw();
   }
