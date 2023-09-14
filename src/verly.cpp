@@ -3,7 +3,6 @@
 #include "verly.hpp"
 #include <cmath>
 #include <algorithm>
-#include "instrumentor.hpp"
 
 Verly::Verly() {
   this->entities = {};
@@ -31,20 +30,18 @@ void Verly::removePoint(std::shared_ptr<Particle> point, std::shared_ptr<Entity>
 }
 
 void Verly::update() {
-	PROFILE_FUNCTION();
   for (int i = 0; i < this->entities.size(); i++) {
-    this->entities.at(i)->update();
+    this->entities[i]->update();
   }
 }
 
 void Verly::draw() {
-	PROFILE_FUNCTION();
-
   for (int i = 0; i < this->entities.size(); i++) {
-    this->entities.at(i)->draw();
+    this->entities[i]->draw();
   }
 }
 
+#if 0
 std::shared_ptr<Entity> Verly::createRope(int x, int y, int segments, int gap, bool pin) {
 	auto rope = std::make_shared<Entity>();
 
@@ -91,6 +88,8 @@ std::shared_ptr<Entity> Verly::createHexagon(int x, int y, int segments, int rad
 
 	return hexagon;
 }
+#endif
+
 
 std::shared_ptr<Entity> Verly::createCloth(int posx, int posy, int w, int h, int segments, int pinOffset) {
 	auto cloth = std::make_shared<Entity>();
@@ -103,16 +102,16 @@ std::shared_ptr<Entity> Verly::createCloth(int posx, int posy, int w, int h, int
 			int px = posx + x * xStride - w / 2 + xStride / 2;
 			int py = posy + y * yStride - h / 2 + yStride / 2;
 			auto p = std::make_shared<Particle>(px, py);
-			cloth->addPoint(p);
+			cloth->points.push_back(std::move(p));
 
 			if (x > 0) {
 				auto stickX = std::make_shared<Stick>(cloth->points.at(y * segments + x),cloth->points.at( y * segments + x - 1));
-				cloth->addStick(stickX);
+				cloth->sticks.push_back(std::move(stickX));
 			}
 
 			if (y > 0) {
 				auto stickY = std::make_shared<Stick>(cloth->points.at(y * segments + x), cloth->points.at((y - 1) * segments + x));
-				cloth->addStick(stickY);
+				cloth->sticks.push_back(std::move(stickY));
 			}
 		}
 	}
@@ -124,7 +123,7 @@ std::shared_ptr<Entity> Verly::createCloth(int posx, int posy, int w, int h, int
 		}
 	}
 
-	return cloth;
+	return std::move(cloth);
 }
 
 std::shared_ptr<Entity> Verly::createBox(int x, int y, int w, int h) {
@@ -140,15 +139,24 @@ std::shared_ptr<Entity> Verly::createBox(int x, int y, int w, int h) {
 	auto joint3 = std::make_shared<Stick>(p3, p4);
 	auto joint4 = std::make_shared<Stick>(p4, p1);
 	auto joint5 = std::make_shared<Stick>(p4, p2);
-	box->addPoint(p1);
-	box->addPoint(p2);
-	box->addPoint(p3);
-	box->addPoint(p4);
-	box->addStick(joint1);
-	box->addStick(joint2);
-	box->addStick(joint3);
-	box->addStick(joint4);
-	box->addStick(joint5);
+	box->points.push_back(std::move(p1));
+	box->points.push_back(std::move(p2));
+	box->points.push_back(std::move(p3));
+	box->points.push_back(std::move(p4));
+	box->sticks.push_back(std::move(joint1));
+	box->sticks.push_back(std::move(joint2));
+	box->sticks.push_back(std::move(joint3));
+	box->sticks.push_back(std::move(joint4));
+	box->sticks.push_back(std::move(joint5));
+	// box->addPoint(std::move(p1));
+	// box->addPoint(std::move(p2));
+	// box->addPoint(std::move(p3));
+	// box->addPoint(std::move(p4));
+	// box->addStick(std::move(joint1));
+	// box->addStick(std::move(joint2));
+	// box->addStick(std::move(joint3));
+	// box->addStick(std::move(joint4));
+	// box->addStick(std::move(joint5));
 	
   return box;
 }

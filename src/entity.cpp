@@ -4,6 +4,7 @@
 #include "stick.hpp"
 #include <memory>
 #include <algorithm>
+#include <execution>
 #include "instrumentor.hpp"
 
 Entity::Entity() {
@@ -12,28 +13,27 @@ Entity::Entity() {
   this->iterations = VERLY_ITERATIONS;
 }
 
-void Entity::addPoint(std::shared_ptr<Particle> point) {
-  this->points.push_back(point);
-}
+// void Entity::addPoint(std::unique_ptr<Particle>& point) {
+//   this->points.push_back(point);
+// }
 
-void Entity::addStick(std::shared_ptr<Stick> stick) {
-  // TODO: fix
-  stick->Init();
-  this->sticks.push_back(stick);
-}
+// void Entity::addStick(std::unique_ptr<Stick>& stick) {
+//   // TODO: fix
+//   stick->Init();
+//   this->sticks.push_back(stick);
+// }
 
 void Entity::update() {
-  PROFILE_FUNCTION();
   for (int m = 0; m < this->points.size(); m++)  {
-    this->points.at(m)->update();
+    this->points[m].get()->update();
   }
 
   for (int i = 0; i < this->iterations; i++) {
     for (int j = 0; j < this->sticks.size(); j++)  {
-      this->sticks.at(j)->update();
+      this->sticks[j].get()->update();
     }
     for (int k = 0; k < this->points.size(); k++)  {
-      this->points.at(k)->constrain();
+      this->points[k].get()->constrain();
     }
   }
 }
@@ -43,15 +43,15 @@ void Entity::draw() {
   //   this->points.at(i)->draw();
   // }
   for (int k = 0; k < this->sticks.size(); k++)  {
-    this->sticks.at(k)->draw();
+    this->sticks[k]->draw();
   }
   // this->drawPointIndices();
 }
 
 void Entity::drawPointIndices() {
   for (int i = 0; i < this->points.size(); i++) {
-    auto point = this->points.at(i);
+    auto point = this->points;
     auto index = std::to_string(i).c_str();
-    DrawText(index, point->pos.x + 12, point->pos.y - 12, 20, GRAY);
+    DrawText(index, point[i]->pos.x + 12, point[i]->pos.y - 12, 20, GRAY);
   };
 }

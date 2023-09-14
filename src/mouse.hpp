@@ -9,7 +9,7 @@ public:
   Mouse();
 
   Vector2 mouse;
-  std::shared_ptr<Particle> dragPoint;
+  Particle* dragPoint;
   std::shared_ptr<Entity> hoveredEntity;
   void update(const Verly& verly);
 

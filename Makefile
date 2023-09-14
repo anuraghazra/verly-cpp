@@ -16,8 +16,8 @@ target := $(buildDir)/$(executable)
 sources := $(call rwildcard,src/,*.cpp)
 objects := $(patsubst src/%, $(buildDir)/%, $(patsubst %.cpp, %.o, $(sources)))
 depends := $(patsubst %.o, %.d, $(objects))
-compileFlags := -std=c++17 -I include
-linkFlags = -L lib/$(platform) -l raylib
+compileFlags := -std=c++17 -I include -O -O1 -pg
+linkFlags = -L lib/$(platform) -l raylib -pg
 
 # Check for Windows
 ifeq ($(OS), Windows_NT)
@@ -99,3 +99,11 @@ execute:
 # Clean up all relevant files
 clean:
 	$(RM) $(call platformpth, $(buildDir)/*)
+
+profile-start: 
+	make clean
+	make ./bin/app
+	./bin/app
+profile-end:
+	gprof ./bin/app gmon.out | /home/anuraghazra/.local/bin/gprof2dot -w -s | dot -Tpng -Gdpi=200 -o ./profiles/$(NAME).png
+	

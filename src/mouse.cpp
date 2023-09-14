@@ -50,7 +50,7 @@ void Mouse::findNearestPoint(const Verly& verly) {
       int dist = entity->points.at(i)->pos.Distance(this->mouse);
       if (dist < d) {
         auto e = verly.entities.at(k);
-        this->dragPoint = e->points.at(i);
+        this->dragPoint = e->points[i].get();
         this->hoveredEntity = e;
       }
     }
