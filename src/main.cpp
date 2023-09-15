@@ -25,13 +25,18 @@ int main() {
 
 	// verly.addEntity(box);
 	// verly.addEntity(rope);
-	verly.addEntity(cloth);
+	verly.addEntity(std::move(cloth));
 	// verly.addEntity(heaxgon);
-	Instrumentor::Get().BeginSession("Verly Profile");
+
+	// auto e1 = Entity();
+	// auto p1 = Particle{150, 500};
+	// auto p2 = Particle{100, 600};
+	// e1.addPoint(std::move(p1));
+	// e1.addPoint(std::move(p2));
+	// auto s1 = Stick((e1.points.at(0)), (e1.points.at(1)));
+	// e1.addStick(std::move(s1));
 
 	while (!WindowShouldClose()) {
-		PROFILE_FUNCTION();
-
   	// if (IsKeyDown(KEY_DELETE)) {
 		// 	if (mouse.dragPoint != nullptr)  {
 		// 		verly.removePoint(mouse.dragPoint, mouse.hoveredEntity);		
@@ -39,15 +44,17 @@ int main() {
 		// }
 		// mouse.update(verly);
 		verly.update();
+		// e1.update();
 
 		BeginDrawing();
 		ClearBackground(Color{ 245, 245, 245, 255 });
+		DrawFPS(100, 100);
+		// e1.draw();
 		verly.draw();
 		EndDrawing();
 	}
 
 	CloseWindow();
-	Instrumentor::Get().EndSession();
 
 	return 0;
 }

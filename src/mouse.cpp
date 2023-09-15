@@ -12,6 +12,7 @@ Mouse::Mouse() {
 void Mouse::update(const Verly& verly) {
   this->mouse = GetMousePosition();
 
+  #if 0
   if (!IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
     this->findNearestPoint(verly);
   } else {
@@ -31,9 +32,12 @@ void Mouse::update(const Verly& verly) {
       this->dragPoint = nullptr;
     }
   }
+  #endif
 
-  this->draw();
+  // this->draw();
 }
+
+#if 0
 
 void Mouse::draw() {
   if (this->dragPoint == nullptr) return;
@@ -56,3 +60,4 @@ void Mouse::findNearestPoint(const Verly& verly) {
     }
   }
 }
+#endif

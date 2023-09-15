@@ -15,5 +15,5 @@ public:
 
 private:
   void draw();
-  void findNearestPoint(const Verly& verly);
+  // void findNearestPoint(const Verly& verly);
 };

@@ -77,7 +77,8 @@
     "semaphore": "cpp",
     "span": "cpp",
     "cinttypes": "cpp",
-    "variant": "cpp"
+    "variant": "cpp",
+    "fstream": "cpp"
   },
   "cmake.configureOnOpen": false,
   "dotnet.defaultSolution": "disable"
