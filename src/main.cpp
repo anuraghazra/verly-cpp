@@ -4,6 +4,7 @@
 #include <vector>
 #include <iostream>
 #include <memory>
+#include <string>
 #include "mouse.hpp"
 #include "instrumentor.hpp"
 
@@ -20,7 +21,7 @@ int main() {
 	Mouse mouse = Mouse();
 	// auto box = Verly::createBox(100, 100, 100, 100);
 	// auto rope = Verly::createRope(200, 30, 10, 30, true);
-	auto cloth = Verly::createCloth(500, 100, 500, 300, 100, 1);
+	auto cloth = Verly::createCloth(500, 100, 500, 300, 150, 1);
 	// auto heaxgon = Verly::createHexagon(800, 300, 12, 100, 3, 8);
 
 	// verly.addEntity(box);
@@ -49,6 +50,8 @@ int main() {
 		BeginDrawing();
 		ClearBackground(Color{ 245, 245, 245, 255 });
 		DrawFPS(100, 100);
+		DrawText(std::string("Points: " + std::to_string(verly.entities.at(0).points.size())).c_str(), 10, 50, 15, GRAY);
+		DrawText(std::string("Sticks: " + std::to_string(verly.entities.at(0).sticks.size())).c_str(), 10, 70, 15, GRAY);
 		// e1.draw();
 		verly.draw();
 		EndDrawing();
