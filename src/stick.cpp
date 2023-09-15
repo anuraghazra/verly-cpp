@@ -24,11 +24,11 @@ void Stick::update() {
 	auto m2 = this->startPoint->mass / m1;
 	m1 = this->endPoint->mass / m1;
 
-	if (!this->startPoint->pinned) {
+	if (!*this->startPoint->pinned) {
 		this->startPoint->pos->x -= offsetx * m1;
 		this->startPoint->pos->y -= offsety * m1;
 	}
-	if (!this->endPoint->pinned) {
+	if (!*this->endPoint->pinned) {
 		this->endPoint->pos->x += offsetx * m2;
 		this->endPoint->pos->y += offsety * m2;
 	}

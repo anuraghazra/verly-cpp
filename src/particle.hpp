@@ -15,8 +15,8 @@ public:
 	raylib::Vector2* pos;
 	raylib::Vector2* oldPos;
 	raylib::Vector2 gravity;
-	raylib::Color color;
-	bool pinned;
+	raylib::Color* color;
+	bool* pinned;
 	float mass;
 	float bounce;
 	float friction;

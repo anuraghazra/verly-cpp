@@ -37,10 +37,10 @@ void Entity::update() {
 
 void Entity::draw() {
   // for (int i = 0; i < this->points.size(); i++)  {
-  //   this->points.at(i).draw();
+  //   this->points[i].draw();
   // }
   for (int k = 0; k < this->sticks.size(); k++)  {
-    this->sticks.at(k).draw();
+    this->sticks[k].draw();
   }
   // this->drawPointIndices();
 }

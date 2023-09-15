@@ -21,7 +21,7 @@ int main() {
 	Mouse mouse = Mouse();
 	// auto box = Verly::createBox(100, 100, 100, 100);
 	// auto rope = Verly::createRope(200, 30, 10, 30, true);
-	auto cloth = Verly::createCloth(500, 100, 500, 300, 150, 1);
+	auto cloth = Verly::createCloth(500, 100, 700, 300, 100, 1);
 	// auto heaxgon = Verly::createHexagon(800, 300, 12, 100, 3, 8);
 
 	// verly.addEntity(box);
@@ -43,7 +43,7 @@ int main() {
 		// 		verly.removePoint(mouse.dragPoint, mouse.hoveredEntity);		
 		// 	}
 		// }
-		// mouse.update(verly);
+		mouse.update(verly);
 		verly.update();
 		// e1.update();
 

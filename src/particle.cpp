@@ -12,12 +12,12 @@ Particle::Particle(float x, float y) {
 	this->pos = new raylib::Vector2(x, y);
 	this->oldPos = new raylib::Vector2(this->pos->x, this->pos->y);
 	this->gravity = raylib::Vector2(0, 0.4);
-	this->pinned = false;
-	this->color = PARTICLE_COLOR;
+	this->pinned = new bool(false);
+	this->color = new PARTICLE_COLOR;
 }
 
 void Particle::update() {
-	if (this->pinned) return;
+	if (*this->pinned) return;
 
 	auto vel = this->pos->Subtract(*this->oldPos);
 	vel *= this->friction;
@@ -60,5 +60,5 @@ void Particle::applyForce(raylib::Vector2 force) {
 }
 
 void Particle::draw() {
-	DrawCircle(this->pos->x, this->pos->y, this->radius, this->color);
+	DrawCircle(this->pos->x, this->pos->y, this->radius, *this->color);
 }

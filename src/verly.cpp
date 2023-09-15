@@ -153,7 +153,7 @@ Entity Verly::createCloth(int posx, int posy, int w, int h, int segments, int pi
 	// pin points at segmented intervals 
 	for (int x = 0; x < segments; ++x) {
 		if (x % pinOffset == 0) {
-			cloth->points.at(x).pinned = true;
+			*cloth->points.at(x).pinned = true;
 		}
 	}
 
