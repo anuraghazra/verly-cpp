@@ -11,7 +11,7 @@ public:
   Vector2 mouse;
   const Particle* dragPoint;
   Entity* hoveredEntity;
-  void update(const Verly& verly);
+  void update(Verly& verly);
 
 private:
   void draw();

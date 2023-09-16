@@ -20,7 +20,7 @@ int main() {
 	Verly verly = Verly();
 	Mouse mouse = Mouse();
 	auto box = Verly::createBox(100, 100, 100, 100);
-	auto cloth = Verly::createCloth(500, 100, 700, 300, 100, 1);
+	auto cloth = Verly::createCloth(500, 100, 700, 300, 20, 1);
 	// auto rope = Verly::createRope(200, 30, 10, 30, true);
 	// auto heaxgon = Verly::createHexagon(800, 300, 12, 100, 3, 8);
 
@@ -38,13 +38,8 @@ int main() {
 	// e1.addStick(std::move(s1));
 
 	while (!WindowShouldClose()) {
-  	if (IsKeyDown(KEY_DELETE)) {
-			if (mouse.dragPoint != nullptr)  {
-				verly.removePoint(mouse.dragPoint, mouse.hoveredEntity);
-			}
-		}
-		mouse.update(verly);
 		verly.update();
+		mouse.update(verly);
 
 		BeginDrawing();
 		ClearBackground(Color{ 245, 245, 245, 255 });

@@ -4,29 +4,33 @@
 #include "verly.hpp"
 
 Mouse::Mouse() {
-  this->dragPoint = nullptr;  
-  this->hoveredEntity = nullptr;  
+  this->dragPoint = nullptr;
+  this->hoveredEntity = nullptr;
   this->mouse = GetMousePosition();
 }
 
-void Mouse::update(const Verly& verly) {
+void Mouse::update(Verly& verly) {
   this->mouse = GetMousePosition();
 
-  if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
-    if (this->dragPoint != nullptr) {
-      *this->dragPoint->color = PARTICLE_HOVER_COLOR;
-      *this->dragPoint->pinned = true;
-      this->dragPoint->pos->x = this->mouse.x;
-      this->dragPoint->pos->y = this->mouse.y;
-    }
-  } else {
+  if (IsMouseButtonUp(MOUSE_LEFT_BUTTON)) {
     this->findNearestPoint(verly);
   }
 
-  if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
-    if (this->dragPoint != nullptr)  {
-      *this->dragPoint->color = PARTICLE_COLOR;
+  // on mouse down pin
+  if (IsMouseButtonDown(MOUSE_LEFT_BUTTON)) {
+    if (this->dragPoint != nullptr) {
+      *this->dragPoint->pinned = true;
+      *this->dragPoint->color = PARTICLE_HOVER_COLOR;
+      this->dragPoint->pos->x = mouse.x;
+      this->dragPoint->pos->y = mouse.y;
+    }
+  } 
+
+  // on mouse up unpin
+  if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON)) {
+    if (this->dragPoint != nullptr) {
       *this->dragPoint->pinned = false;
+      *this->dragPoint->color = PARTICLE_COLOR;
       this->dragPoint->oldPos->x = this->dragPoint->pos->x;
       this->dragPoint->oldPos->y = this->dragPoint->pos->y;
       this->dragPoint = nullptr;
@@ -35,7 +39,6 @@ void Mouse::update(const Verly& verly) {
 
   this->draw();
 }
-
 
 void Mouse::draw() {
   if (this->dragPoint == nullptr) return;
