@@ -2,8 +2,9 @@
   "tasks": [
     {
       "type": "shell",
-      "label": "Build & Run Verly",
-      "command": "mingw32-make bin/app && mingw32-make execute",
+      "label": "win-build",
+      "problemMatcher": "$gcc",
+      "command": "mingw32-make bin/app",
       "group": "build",
       "detail": "Build & Run Verly"
     },

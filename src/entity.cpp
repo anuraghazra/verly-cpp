@@ -12,6 +12,18 @@ Entity::Entity() {
   this->iterations = VERLY_ITERATIONS;
 }
 
+// Helper function to create point
+void Entity::createPoint(int x, int y) {
+	auto p1 = Particle(x, y);
+	this->addPoint(std::move(p1));
+}
+
+// Helper function to create stick
+void Entity::createStick(int from, int to) {
+	auto s1 = Stick(this->points.at(from), this->points.at(to));
+	this->addStick(std::move(s1));
+}
+
 void Entity::addPoint(Particle point) {
   this->points.push_back(point);
 }

@@ -14,6 +14,8 @@ public:
   std::vector<Particle> points;
   std::vector<Stick> sticks;
 
+  void createPoint(int x, int y);
+  void createStick(int from, int to);
   void addPoint(Particle point);
   void addStick(Stick stick);
   void update();

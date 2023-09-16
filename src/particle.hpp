@@ -22,7 +22,6 @@ public:
 	float friction;
 	float groundFriction;
 	int radius;
-	// std::vector<std::shared_ptr<Stick>> sticks;
 
 	void applyForce(raylib::Vector2 force);
 	void update();

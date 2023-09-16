@@ -44,33 +44,28 @@ void Verly::draw() {
   }
 }
 
+void Verly::removePoint(const Particle* point) {
+	// remove the sticks from point
+	for (int i = 0; i < this->entities.at(0).sticks.size(); i++) {
+		auto stick = this->entities.at(0).sticks.at(i);
+		if (stick.startPoint->pos == point->pos) {
+			this->entities.at(0).sticks.erase(this->entities.at(0).sticks.begin() + i);
+		}
+		if (stick.endPoint->pos == point->pos) {
+			this->entities.at(0).sticks.erase(this->entities.at(0).sticks.begin() + i);
+		}
+	}
+
+	// remove the point from the entity
+	for (int i = 0; i < this->entities.at(0).points.size(); i++) {
+		if (&this->entities.at(0).points[i] == point) {
+			this->entities.at(0).points.erase(this->entities.at(0).points.begin()+i);
+		}
+	}
+}
+
 #if 0
 
-std::shared_ptr<Entity> Verly::createBox(int x, int y, int w, int h) {
-	auto box = std::make_shared<Entity>();
-	
-	auto p1 = std::make_shared<Particle>(x, y);
-	auto p2 = std::make_shared<Particle>(x + w, y);
-	auto p3 = std::make_shared<Particle>(x + w, y + h);
-	auto p4 = std::make_shared<Particle>(x, y + h);
-
-	auto joint1 = std::make_shared<Stick>(p1, p2);
-	auto joint2 = std::make_shared<Stick>(p2, p3);
-	auto joint3 = std::make_shared<Stick>(p3, p4);
-	auto joint4 = std::make_shared<Stick>(p4, p1);
-	auto joint5 = std::make_shared<Stick>(p4, p2);
-	box->addPoint(p1);
-	box->addPoint(p2);
-	box->addPoint(p3);
-	box->addPoint(p4);
-	box->addStick(joint1);
-	box->addStick(joint2);
-	box->addStick(joint3);
-	box->addStick(joint4);
-	box->addStick(joint5);
-	
-  return box;
-}
 
 std::shared_ptr<Entity> Verly::createRope(int x, int y, int segments, int gap, bool pin) {
 	auto rope = std::make_shared<Entity>();
@@ -121,6 +116,21 @@ std::shared_ptr<Entity> Verly::createHexagon(int x, int y, int segments, int rad
 
 #endif
 
+Entity Verly::createBox(int x, int y, int w, int h) {
+	auto box = new Entity();
+	
+	box->createPoint(x, y);
+	box->createPoint(x + w, y);
+	box->createPoint(x + w, y + h);
+	box->createPoint(x, y + h);
+	box->createStick(0, 1);
+	box->createStick(1, 2);
+	box->createStick(2, 3);
+	box->createStick(3, 0);
+	box->createStick(3, 1);
+	
+  return *box;
+}
 
 Entity Verly::createCloth(int posx, int posy, int w, int h, int segments, int pinOffset) {
 	auto cloth = new Entity();
@@ -139,14 +149,13 @@ Entity Verly::createCloth(int posx, int posy, int w, int h, int segments, int pi
 	for (int y = 0; y < segments; ++y) {
 		for (int x = 0; x < segments; ++x) {
 			if (x > 0) {
-				auto stickX = Stick((cloth->points.at(y * segments + x)), (cloth->points.at(y * segments + x - 1)));
+				auto stickX = Stick(cloth->points.at(y * segments + x), cloth->points.at(y * segments + x - 1));
 				cloth->addStick(std::move(stickX));
 			}
 			if (y > 0) {
-				auto stickY = Stick((cloth->points.at(y * segments + x)), (cloth->points.at((y - 1) * segments + x)));
+				auto stickY = Stick(cloth->points.at(y * segments + x), cloth->points.at((y - 1) * segments + x));
 				cloth->addStick(std::move(stickY));
 			}
-
 		}
 	}
 
