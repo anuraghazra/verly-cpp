@@ -44,22 +44,22 @@ void Verly::draw() {
   }
 }
 
-void Verly::removePoint(const Particle* point) {
+void Verly::removePoint(const Particle* point, Entity* hoveredEntity) {
 	// remove the sticks from point
-	for (int i = 0; i < this->entities.at(0).sticks.size(); i++) {
-		auto stick = this->entities.at(0).sticks.at(i);
+	for (int i = hoveredEntity->sticks.size() - 1; i >= 0; i--) {
+		auto stick = hoveredEntity->sticks.at(i);
 		if (stick.startPoint->pos == point->pos) {
-			this->entities.at(0).sticks.erase(this->entities.at(0).sticks.begin() + i);
+			hoveredEntity->sticks.erase(hoveredEntity->sticks.begin() + i);
 		}
 		if (stick.endPoint->pos == point->pos) {
-			this->entities.at(0).sticks.erase(this->entities.at(0).sticks.begin() + i);
+			hoveredEntity->sticks.erase(hoveredEntity->sticks.begin() + i);
 		}
 	}
 
 	// remove the point from the entity
-	for (int i = 0; i < this->entities.at(0).points.size(); i++) {
-		if (&this->entities.at(0).points[i] == point) {
-			this->entities.at(0).points.erase(this->entities.at(0).points.begin()+i);
+	for (int i = hoveredEntity->points.size(); i >=0; i--) {
+		if (&hoveredEntity->points[i] == point) {
+			hoveredEntity->points.erase(hoveredEntity->points.begin()+i);
 		}
 	}
 }

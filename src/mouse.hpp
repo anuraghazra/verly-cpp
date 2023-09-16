@@ -10,7 +10,7 @@ public:
 
   Vector2 mouse;
   const Particle* dragPoint;
-  const Entity* hoveredEntity;
+  Entity* hoveredEntity;
   void update(const Verly& verly);
 
 private:

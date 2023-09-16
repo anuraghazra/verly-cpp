@@ -12,7 +12,7 @@ public:
   static Entity createCloth(int x, int y, int w, int h, int segments, int pinOffset);
   static Entity createHexagon(int x, int y, int segments, int radius = 50, int stride1 = 1, int stride2 = 5);
   void update();
-  void removePoint(const Particle* point);
+  void removePoint(const Particle* point, Entity* hoveredEntity);
   void draw();
   void addEntity(Entity entity);
 };
