@@ -37,6 +37,12 @@ void Mouse::update(Verly& verly) {
     }
   }
 
+  if (IsKeyDown(KEY_DELETE)) {
+    if (this->dragPoint != nullptr)  {
+      verly.removePoint(this->dragPoint, this->hoveredEntity);
+    }
+  }
+
   this->draw();
 }
 
