@@ -3,3 +3,4 @@ lib
 bin
 .idea
 results.json
+gmon.out

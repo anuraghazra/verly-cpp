@@ -14,16 +14,16 @@ int main() {
 	SetConfigFlags(FLAG_WINDOW_HIGHDPI);
 
 	raylib::Window window(screenWidth, screenHeight, "Verly window");
-	SetTargetFPS(60);
+	SetTargetFPS(120);
 
 	Verly verly = Verly();
 	Mouse mouse = Mouse();
-	// auto box = Verly::createBox(100, 100, 100, 100);
-	auto cloth = Verly::createCloth(1200, 200, 1200, 500, 150, 1);
+	auto box = Verly::createBox(100, 100, 100, 100);
+	auto cloth = Verly::createCloth(1200, 200, 1200, 500, 100, 1);
 	// auto rope = Verly::createRope(200, 30, 10, 30, true);
 	// auto heaxgon = Verly::createHexagon(800, 300, 12, 100, 3, 8);
 
-	// verly.addEntity(std::move(box));
+	verly.addEntity(std::move(box));
 	verly.addEntity(std::move(cloth));
 	// verly.addEntity(rope);
 	// verly.addEntity(heaxgon);
@@ -40,7 +40,6 @@ int main() {
 		mouse.update(verly);
 		verly.update();
 
-		BeginDrawing();
 		ClearBackground(Color{ 245, 245, 245, 255 });
 		DrawFPS(100, 100);
 		
