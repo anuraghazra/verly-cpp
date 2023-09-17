@@ -3,14 +3,14 @@
 #include "particle.hpp"
 #include <memory>
 
-class Stick: public std::enable_shared_from_this<Stick> {
+class Stick {
 public:
-	Stick(std::shared_ptr<Particle> p1, std::shared_ptr<Particle> p2);
+	Stick(Particle& p1, Particle& p2);
 	Color color;
-	void Init();
+	// void Init();
 
-	std::shared_ptr<Particle> startPoint;
-	std::shared_ptr<Particle> endPoint;
+	Particle* startPoint;
+	Particle* endPoint;
 	float stiffness;
 	float length;
 

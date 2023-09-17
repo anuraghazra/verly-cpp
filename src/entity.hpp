@@ -11,11 +11,13 @@ public:
 
   int iterations;
 
-  std::vector<std::shared_ptr<Particle>> points;
-  std::vector<std::shared_ptr<Stick>> sticks;
+  std::vector<Particle> points;
+  std::vector<Stick> sticks;
 
-  void addPoint(std::shared_ptr<Particle> point);
-  void addStick(std::shared_ptr<Stick> stick);
+  Particle* createPoint(int x, int y);
+  Particle* addPoint(Particle point);
+  Stick* createStick(int from, int to);
+  Stick* addStick(Stick stick);
   void update();
   void draw();
   void drawPointIndices();

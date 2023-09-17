@@ -4,41 +4,38 @@
 #include <vector>
 #include <iostream>
 #include <memory>
+#include <string>
 #include "mouse.hpp"
 
 int main() {
-	const int screenWidth = 1200;
-	const int screenHeight = 500;
+	const int screenWidth = 1280;
+	const int screenHeight = 800;
 
-	SetConfigFlags(FLAG_MSAA_4X_HINT | FLAG_WINDOW_HIGHDPI);
+	// SetConfigFlags(FLAG_WINDOW_HIGHDPI);
 
 	raylib::Window window(screenWidth, screenHeight, "Verly window");
 	SetTargetFPS(120);
 
 	Verly verly = Verly();
 	Mouse mouse = Mouse();
+
 	auto box = Verly::createBox(100, 100, 100, 100);
-	auto rope = Verly::createRope(200, 30, 10, 30, true);
-	auto cloth = Verly::createCloth(500, 100, 500, 300, 40, 3);
+	auto cloth = Verly::createCloth(200, 100, 10, 10, 50, 1);
+	auto rope = Verly::createRope(200, 30, 50, 30, true);
 	auto heaxgon = Verly::createHexagon(800, 300, 12, 100, 3, 8);
 
-	verly.addEntity(box);
-	verly.addEntity(rope);
-	verly.addEntity(cloth);
-	verly.addEntity(heaxgon);
+	verly.addEntity(std::move(box));
+	verly.addEntity(std::move(cloth));
+	verly.addEntity(std::move(rope));
+	verly.addEntity(std::move(heaxgon));
 
 	while (!WindowShouldClose()) {
-  	if (IsKeyDown(KEY_DELETE)) {
-			if (mouse.dragPoint != nullptr)  {
-				verly.removePoint(mouse.dragPoint, mouse.hoveredEntity);		
-			}
-		}
 		mouse.update(verly);
 		verly.update();
 
-
-		BeginDrawing();
 		ClearBackground(Color{ 245, 245, 245, 255 });
+		DrawFPS(100, 100);
+		
 		verly.draw();
 		EndDrawing();
 	}

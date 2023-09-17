@@ -77,8 +77,18 @@
     "semaphore": "cpp",
     "span": "cpp",
     "cinttypes": "cpp",
-    "variant": "cpp"
+    "variant": "cpp",
+    "fstream": "cpp",
+    "condition_variable": "cpp",
+    "*.m": "cpp"
   },
   "cmake.configureOnOpen": false,
-  "dotnet.defaultSolution": "disable"
+  "dotnet.defaultSolution": "disable",
+  "makefile.launchConfigurations": [
+    {
+      "cwd": "d:\\CAM Files\\CPP\\verly-cpp\\bin",
+      "binaryPath": "d:\\CAM Files\\CPP\\verly-cpp\\bin\\app",
+      "binaryArgs": []
+    }
+  ]
 }

@@ -4,6 +4,7 @@
 #include "stick.hpp"
 #include <memory>
 #include <algorithm>
+#include "instrumentor.hpp"
 
 Entity::Entity() {
   this->points = {};
@@ -11,37 +12,49 @@ Entity::Entity() {
   this->iterations = VERLY_ITERATIONS;
 }
 
-void Entity::addPoint(std::shared_ptr<Particle> point) {
-  this->points.push_back(point);
+// Helper function to create point
+Particle* Entity::createPoint(int x, int y) {
+	auto p1 = Particle(x, y);
+	return (this->addPoint(std::move(p1)));
 }
 
-void Entity::addStick(std::shared_ptr<Stick> stick) {
-  // TODO: fix
-  stick->Init();
+// Helper function to create stick
+Stick* Entity::createStick(int from, int to) {
+	auto s1 = Stick(this->points.at(from), this->points.at(to));
+	return this->addStick(std::move(s1));
+}
+
+Particle* Entity::addPoint(Particle point) {
+  this->points.push_back(point);
+  return &this->points.back();
+}
+
+Stick* Entity::addStick(Stick stick) {
   this->sticks.push_back(stick);
+  return &this->sticks.back();
 }
 
 void Entity::update() {
-  for (int m = 0; m < this->points.size(); m++)  {
-    this->points.at(m)->update();
+  for (int i = 0; i < this->points.size(); i++)  {
+    this->points[i].update();
   }
 
   for (int i = 0; i < this->iterations; i++) {
     for (int j = 0; j < this->sticks.size(); j++)  {
-      this->sticks.at(j)->update();
+      this->sticks[j].update();
     }
     for (int k = 0; k < this->points.size(); k++)  {
-      this->points.at(k)->constrain();
+      this->points[k].constrain();
     }
   }
 }
 
 void Entity::draw() {
   for (int i = 0; i < this->points.size(); i++)  {
-    this->points.at(i)->draw();
+    this->points[i].draw();
   }
   for (int k = 0; k < this->sticks.size(); k++)  {
-    this->sticks.at(k)->draw();
+    this->sticks[k].draw();
   }
   // this->drawPointIndices();
 }
@@ -50,6 +63,6 @@ void Entity::drawPointIndices() {
   for (int i = 0; i < this->points.size(); i++) {
     auto point = this->points.at(i);
     auto index = std::to_string(i).c_str();
-    DrawText(index, point->pos.x + 12, point->pos.y - 12, 20, GRAY);
+    DrawText(index, point.pos->x + 12, point.pos->y - 12, 20, GRAY);
   };
 }
