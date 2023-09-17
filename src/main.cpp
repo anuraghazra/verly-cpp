@@ -9,7 +9,7 @@
 
 int main() {
 	const int screenWidth = 1280;
-	const int screenHeight = 720;
+	const int screenHeight = 800;
 
 	// SetConfigFlags(FLAG_WINDOW_HIGHDPI);
 
@@ -20,7 +20,7 @@ int main() {
 	Mouse mouse = Mouse();
 
 	auto box = Verly::createBox(100, 100, 100, 100);
-	auto cloth = Verly::createCloth(500, 200, 500, 300, 20, 1);
+	auto cloth = Verly::createCloth(200, 100, 10, 10, 50, 1);
 	auto rope = Verly::createRope(200, 30, 50, 30, true);
 	auto heaxgon = Verly::createHexagon(800, 300, 12, 100, 3, 8);
 
@@ -29,14 +29,6 @@ int main() {
 	verly.addEntity(std::move(rope));
 	verly.addEntity(std::move(heaxgon));
 
-	// auto e1 = Entity();
-	// auto p1 = Particle{150, 500};
-	// auto p2 = Particle{100, 600};
-	// e1.addPoint(std::move(p1));
-	// e1.addPoint(std::move(p2));
-	// auto s1 = Stick((e1.points.at(0)), (e1.points.at(1)));
-	// e1.addStick(std::move(s1));
-
 	while (!WindowShouldClose()) {
 		mouse.update(verly);
 		verly.update();
@@ -44,8 +36,6 @@ int main() {
 		ClearBackground(Color{ 245, 245, 245, 255 });
 		DrawFPS(100, 100);
 		
-		// DrawText(std::string("Points: " + std::to_string(verly.entities.at(1).points.size())).c_str(), 10, 50, 15, GRAY);
-		// DrawText(std::string("Sticks: " + std::to_string(verly.entities.at(1).sticks.size())).c_str(), 10, 70, 15, GRAY);
 		verly.draw();
 		EndDrawing();
 	}

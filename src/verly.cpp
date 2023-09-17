@@ -121,16 +121,13 @@ Entity Verly::createHexagon(int x, int y, int segments, int radius, int stride1,
 	return *hexagon;
 }
 
-Entity Verly::createCloth(int posx, int posy, int w, int h, int segments, int pinOffset) {
+Entity Verly::createCloth(int posx, int posy, int gapx, int gapy, int segments, int pinOffset) {
 	auto cloth = new Entity();
-
-	int xStride = w / segments;
-	int yStride = h / segments;
 
 	for (int y = 0; y < segments; ++y) {
 		for (int x = 0; x < segments; ++x) {
-			int px = posx + x * xStride - w / 2 + xStride / 2;
-			int py = posy + y * yStride - h / 2 + yStride / 2;
+			int px = posx + (x * gapx);
+			int py = posy + (y * gapy);
 			cloth->createPoint(px, py);
 		}
 	}
