@@ -13,23 +13,25 @@ Entity::Entity() {
 }
 
 // Helper function to create point
-void Entity::createPoint(int x, int y) {
+Particle* Entity::createPoint(int x, int y) {
 	auto p1 = Particle(x, y);
-	this->addPoint(std::move(p1));
+	return (this->addPoint(std::move(p1)));
 }
 
 // Helper function to create stick
-void Entity::createStick(int from, int to) {
+Stick* Entity::createStick(int from, int to) {
 	auto s1 = Stick(this->points.at(from), this->points.at(to));
-	this->addStick(std::move(s1));
+	return this->addStick(std::move(s1));
 }
 
-void Entity::addPoint(Particle point) {
+Particle* Entity::addPoint(Particle point) {
   this->points.push_back(point);
+  return &this->points.back();
 }
 
-void Entity::addStick(Stick stick) {
+Stick* Entity::addStick(Stick stick) {
   this->sticks.push_back(stick);
+  return &this->sticks.back();
 }
 
 void Entity::update() {
@@ -48,9 +50,9 @@ void Entity::update() {
 }
 
 void Entity::draw() {
-  // for (int i = 0; i < this->points.size(); i++)  {
-  //   this->points[i].draw();
-  // }
+  for (int i = 0; i < this->points.size(); i++)  {
+    this->points[i].draw();
+  }
   for (int k = 0; k < this->sticks.size(); k++)  {
     this->sticks[k].draw();
   }

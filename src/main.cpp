@@ -8,25 +8,26 @@
 #include "mouse.hpp"
 
 int main() {
-	const int screenWidth = 1920;
-	const int screenHeight = 1080;
+	const int screenWidth = 1280;
+	const int screenHeight = 720;
 
-	SetConfigFlags(FLAG_WINDOW_HIGHDPI);
+	// SetConfigFlags(FLAG_WINDOW_HIGHDPI);
 
 	raylib::Window window(screenWidth, screenHeight, "Verly window");
 	SetTargetFPS(120);
 
 	Verly verly = Verly();
 	Mouse mouse = Mouse();
+
 	auto box = Verly::createBox(100, 100, 100, 100);
-	auto cloth = Verly::createCloth(1200, 200, 1200, 500, 100, 1);
-	// auto rope = Verly::createRope(200, 30, 10, 30, true);
-	// auto heaxgon = Verly::createHexagon(800, 300, 12, 100, 3, 8);
+	auto cloth = Verly::createCloth(500, 200, 500, 300, 20, 1);
+	auto rope = Verly::createRope(200, 30, 50, 30, true);
+	auto heaxgon = Verly::createHexagon(800, 300, 12, 100, 3, 8);
 
 	verly.addEntity(std::move(box));
 	verly.addEntity(std::move(cloth));
-	// verly.addEntity(rope);
-	// verly.addEntity(heaxgon);
+	verly.addEntity(std::move(rope));
+	verly.addEntity(std::move(heaxgon));
 
 	// auto e1 = Entity();
 	// auto p1 = Particle{150, 500};

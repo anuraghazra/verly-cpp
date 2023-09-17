@@ -64,58 +64,6 @@ void Verly::removePoint(const Particle* point, Entity* hoveredEntity) {
 	}
 }
 
-#if 0
-
-
-std::shared_ptr<Entity> Verly::createRope(int x, int y, int segments, int gap, bool pin) {
-	auto rope = std::make_shared<Entity>();
-
-	for (int i = 0; i < segments; i++) {
-		auto p1 = std::make_shared<Particle>(x + i * gap, y);
-		rope->addPoint(p1);
-	}
-
-	for (int i = 0; i < segments - 1; i++) {
-		auto joint1 = std::make_shared<Stick>(rope->points.at(i), rope->points.at((i + 1) % segments));
-		rope->addStick(joint1);
-	}
-
-	if (pin == true) {
-		rope->points.at(0)->pinned = true;
-	}
-
-	return rope;
-}
-
-std::shared_ptr<Entity> Verly::createHexagon(int x, int y, int segments, int radius, int stride1, int stride2) {
-	auto hexagon = std::make_shared<Entity>();
-	float stride = (2 * PI) / segments;
-
-	// points
-	for (int i = 0; i < segments; ++i) {
-		float theta = i * stride;
-		auto p = std::make_shared<Particle>(x + cos(theta) * radius, y + sin(theta) * radius);
-		hexagon->addPoint(p);
-	}
-
-	auto center = std::make_shared<Particle>(x, y);
-	hexagon->addPoint(center);
-
-	// sticks
-	for (int i = 0; i < segments; ++i) {
-		auto stick1 = std::make_shared<Stick>(hexagon->points.at(i), hexagon->points.at((i + stride1) % segments));
-		auto stick2 = std::make_shared<Stick>(hexagon->points.at(i), center);
-		auto stick3 = std::make_shared<Stick>(hexagon->points.at(i), hexagon->points.at((i + stride2) % segments));
-		hexagon->addStick(stick1);
-		hexagon->addStick(stick2);
-		hexagon->addStick(stick3);
-	}
-
-	return hexagon;
-}
-
-#endif
-
 Entity Verly::createBox(int x, int y, int w, int h) {
 	auto box = new Entity();
 	
@@ -132,6 +80,47 @@ Entity Verly::createBox(int x, int y, int w, int h) {
   return *box;
 }
 
+Entity Verly::createRope(int x, int y, int segments, int gap, bool pin) {
+	auto rope = new Entity();
+
+	for (int i = 0; i < segments; i++) {
+		rope->createPoint(x + i * gap, y);
+	}
+
+	for (int i = 0; i < segments - 1; i++) {
+		rope->createStick(i, (i + 1) % segments);
+	}
+
+	if (pin == true) {
+		*rope->points.at(0).pinned = true;
+	}
+
+	return *rope;
+}
+
+Entity Verly::createHexagon(int x, int y, int segments, int radius, int stride1, int stride2) {
+	auto hexagon = new Entity();
+	float stride = (2 * PI) / segments;
+
+	// points
+	for (int i = 0; i < segments; ++i) {
+		float theta = i * stride;
+		hexagon->createPoint(x + cos(theta) * radius, y + sin(theta) * radius);
+	}
+
+	auto center = hexagon->createPoint(x, y);
+
+	// sticks
+	for (int i = 0; i < segments; ++i) {
+		hexagon->createStick(i, (i + stride1) % segments);
+		hexagon->createStick(i, (i + stride2) % segments);
+		// Connect from center to all the segments
+		hexagon->addStick(std::move(Stick(*center, hexagon->points.at(i))));
+	}
+
+	return *hexagon;
+}
+
 Entity Verly::createCloth(int posx, int posy, int w, int h, int segments, int pinOffset) {
 	auto cloth = new Entity();
 
@@ -142,19 +131,17 @@ Entity Verly::createCloth(int posx, int posy, int w, int h, int segments, int pi
 		for (int x = 0; x < segments; ++x) {
 			int px = posx + x * xStride - w / 2 + xStride / 2;
 			int py = posy + y * yStride - h / 2 + yStride / 2;
-			cloth->addPoint(std::move(Particle(px, py)));
+			cloth->createPoint(px, py);
 		}
 	}
 
 	for (int y = 0; y < segments; ++y) {
 		for (int x = 0; x < segments; ++x) {
 			if (x > 0) {
-				auto stickX = Stick(cloth->points.at(y * segments + x), cloth->points.at(y * segments + x - 1));
-				cloth->addStick(std::move(stickX));
+				cloth->createStick(y * segments + x, y * segments + x - 1);
 			}
 			if (y > 0) {
-				auto stickY = Stick(cloth->points.at(y * segments + x), cloth->points.at((y - 1) * segments + x));
-				cloth->addStick(std::move(stickY));
+				cloth->createStick(y * segments + x, (y - 1) * segments + x);
 			}
 		}
 	}
