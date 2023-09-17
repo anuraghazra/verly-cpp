@@ -8,22 +8,22 @@
 #include "mouse.hpp"
 
 int main() {
-	const int screenWidth = 1200;
-	const int screenHeight = 700;
+	const int screenWidth = 1920;
+	const int screenHeight = 1080;
 
-	// SetConfigFlags();
+	SetConfigFlags(FLAG_WINDOW_HIGHDPI);
 
 	raylib::Window window(screenWidth, screenHeight, "Verly window");
-	SetTargetFPS(120);
+	SetTargetFPS(60);
 
 	Verly verly = Verly();
 	Mouse mouse = Mouse();
-	auto box = Verly::createBox(100, 100, 100, 100);
-	auto cloth = Verly::createCloth(500, 100, 700, 300, 100, 1);
+	// auto box = Verly::createBox(100, 100, 100, 100);
+	auto cloth = Verly::createCloth(1200, 200, 1200, 500, 150, 1);
 	// auto rope = Verly::createRope(200, 30, 10, 30, true);
 	// auto heaxgon = Verly::createHexagon(800, 300, 12, 100, 3, 8);
 
-	verly.addEntity(std::move(box));
+	// verly.addEntity(std::move(box));
 	verly.addEntity(std::move(cloth));
 	// verly.addEntity(rope);
 	// verly.addEntity(heaxgon);
@@ -37,14 +37,15 @@ int main() {
 	// e1.addStick(std::move(s1));
 
 	while (!WindowShouldClose()) {
-		verly.update();
 		mouse.update(verly);
+		verly.update();
 
 		BeginDrawing();
 		ClearBackground(Color{ 245, 245, 245, 255 });
 		DrawFPS(100, 100);
 		
-		// e1.draw();
+		// DrawText(std::string("Points: " + std::to_string(verly.entities.at(1).points.size())).c_str(), 10, 50, 15, GRAY);
+		// DrawText(std::string("Sticks: " + std::to_string(verly.entities.at(1).sticks.size())).c_str(), 10, 70, 15, GRAY);
 		verly.draw();
 		EndDrawing();
 	}

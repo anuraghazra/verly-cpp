@@ -34,13 +34,13 @@ void Verly::removePoint(std::shared_ptr<Particle> point, std::shared_ptr<Entity>
 
 void Verly::update() {
   for (int i = 0; i < this->entities.size(); i++) {
-    this->entities.at(i).update();
+    this->entities[i].update();
   }
 }
 
 void Verly::draw() {
   for (int i = 0; i < this->entities.size(); i++) {
-    this->entities.at(i).draw();
+    this->entities[i].draw();
   }
 }
 

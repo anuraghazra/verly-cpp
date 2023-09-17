@@ -33,16 +33,16 @@ void Entity::addStick(Stick stick) {
 }
 
 void Entity::update() {
-  for (int m = 0; m < this->points.size(); m++)  {
-    this->points.at(m).update();
+  for (int i = 0; i < this->points.size(); i++)  {
+    this->points[i].update();
   }
 
   for (int i = 0; i < this->iterations; i++) {
     for (int j = 0; j < this->sticks.size(); j++)  {
-      this->sticks.at(j).update();
+      this->sticks[j].update();
     }
     for (int k = 0; k < this->points.size(); k++)  {
-      this->points.at(k).constrain();
+      this->points[k].constrain();
     }
   }
 }
