@@ -9,13 +9,13 @@
 Entity::Entity() {
   this->points = {};
   this->sticks = {};
-  this->iterations = VERLY_ITERATIONS;
+  this->gravity = new raylib::Vector2(0, 0.4);
 }
 
 // Helper function to create point
 Particle* Entity::createPoint(int x, int y) {
-	auto p1 = Particle(x, y);
-	return (this->addPoint(std::move(p1)));
+	auto p1 = Particle(x, y, this->gravity);
+	return this->addPoint(std::move(p1));
 }
 
 // Helper function to create stick
@@ -34,12 +34,12 @@ Stick* Entity::addStick(Stick stick) {
   return &this->sticks.back();
 }
 
-void Entity::update() {
+void Entity::update(int iterations) {
   for (int i = 0; i < this->points.size(); i++)  {
     this->points[i].update();
   }
 
-  for (int i = 0; i < this->iterations; i++) {
+  for (int i = 0; i < iterations; i++) {
     for (int j = 0; j < this->sticks.size(); j++)  {
       this->sticks[j].update();
     }

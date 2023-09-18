@@ -16,7 +16,7 @@ target := $(buildDir)/$(executable)
 sources := $(call rwildcard,src/,*.cpp)
 objects := $(patsubst src/%, $(buildDir)/%, $(patsubst %.cpp, %.o, $(sources)))
 depends := $(patsubst %.o, %.d, $(objects))
-compileFlags := -std=c++17 -I include -O -O1
+compileFlags := -std=c++17 -I include -O -O2
 #  -ggdb
 linkFlags = -L lib/$(platform) -l raylib -pg
 

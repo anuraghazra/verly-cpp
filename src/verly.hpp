@@ -6,6 +6,7 @@ class Verly {
 public:
   Verly();
   std::vector<Entity> entities;
+  int iterations;
 
   static Entity createBox(int x, int y, int w, int h);
   static Entity createRope(int x, int y, int segments, int gap, bool pin);
@@ -15,4 +16,5 @@ public:
   void removePoint(const Particle* point, Entity* hoveredEntity);
   void draw();
   void addEntity(Entity entity);
+  void setIterations(int count);
 };
