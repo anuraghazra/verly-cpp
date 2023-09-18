@@ -1,40 +1,27 @@
 #include "entity.hpp"
 #include "particle.hpp"
 #include "verly.hpp"
+#include "constants.hpp"
 #include <cmath>
 #include <algorithm>
 #include "instrumentor.hpp"
 
 Verly::Verly() {
   this->entities = {};
+	this->iterations = VERLY_ITERATIONS;
 }
 
 void Verly::addEntity(Entity entity) {
   this->entities.push_back(entity);
 }
 
-#if 0
-void Verly::removePoint(std::shared_ptr<Particle> point, std::shared_ptr<Entity> hoveredEntity) {
-	// find which entity this point belongs to
-
-	// do the rest
-  for (int i = 0; i < point->sticks.size(); i++) {
-    auto s = point->sticks.at(i);
-    auto idx = std::find(hoveredEntity->sticks.begin(), hoveredEntity->sticks.end(), s);
-		if (idx != hoveredEntity->sticks.end()) {
-	    hoveredEntity->sticks.erase(idx);
-		}
-  }
-  auto idx = std::find(hoveredEntity->points.begin(), hoveredEntity->points.end(), point);
-	if (idx != hoveredEntity->points.end()) {
-		hoveredEntity->points.erase(idx);
-	}
+void Verly::setIterations(int count) {
+	this->iterations = count;
 }
-#endif
 
 void Verly::update() {
   for (int i = 0; i < this->entities.size(); i++) {
-    this->entities[i].update();
+    this->entities[i].update(this->iterations);
   }
 }
 

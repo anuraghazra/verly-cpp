@@ -3,15 +3,15 @@
 #include <raylib-cpp.hpp>
 #include <iostream>
 
-Particle::Particle(float x, float y) {
+Particle::Particle(float x, float y, raylib::Vector2* gravity) {
 	this->bounce = 0.99;
 	this->friction = 0.97;
 	this->groundFriction = 0.98;
 	this->mass = 1.0;
-	this->radius = 4;
+	this->radius = 10;
 	this->pos = new raylib::Vector2(x, y);
 	this->oldPos = new raylib::Vector2(this->pos->x, this->pos->y);
-	this->gravity = raylib::Vector2(0, 0.4);
+	this->gravity = gravity;
 	this->pinned = new bool(false);
 	this->color = new PARTICLE_COLOR;
 }
@@ -29,8 +29,8 @@ void Particle::update() {
 
 	this->pos->x += vel.x;
 	this->pos->y += vel.y;
-	this->pos->x += this->gravity.x;
-	this->pos->y += this->gravity.y;
+	this->pos->x += this->gravity->x;
+	this->pos->y += this->gravity->y;
 }
 
 void Particle::constrain() {
@@ -60,5 +60,6 @@ void Particle::applyForce(raylib::Vector2 force) {
 }
 
 void Particle::draw() {
-	DrawCircle(this->pos->x, this->pos->y, this->radius, *this->color);
+	unsigned char vel = Clamp(this->pos->Distance(*this->oldPos) * 50, 0, 255);
+	DrawCircle(this->pos->x, this->pos->y, this->radius, Color{(unsigned char)(vel/20), vel, 155, 255});
 }
