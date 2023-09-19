@@ -3,6 +3,10 @@
 [Verly.js](https://github.com/anuraghazra/verly.js) C++ Port
 
 
+TODO:
+
+- Decouple renderer from physics engine
+
 -------
 
 #### Raylib C++ Starter

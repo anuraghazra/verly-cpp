@@ -8,7 +8,7 @@ Particle::Particle(float x, float y, raylib::Vector2* gravity) {
 	this->friction = 0.97;
 	this->groundFriction = 0.98;
 	this->mass = 1.0;
-	this->radius = 10;
+	this->radius = 4;
 	this->pos = new raylib::Vector2(x, y);
 	this->oldPos = new raylib::Vector2(this->pos->x, this->pos->y);
 	this->gravity = gravity;

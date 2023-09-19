@@ -64,13 +64,13 @@ void Mouse::findNearestPoint(const Verly& verly) {
   int d = 10;
   this->dragPoint = nullptr;
   for (int k = 0; k < verly.entities.size(); k++) {
-    for (int i = 0; i < verly.entities[k].points.size(); i++) {
-      auto entity = &verly.entities[k];
-      auto point = &(entity->points.at(i));
+    for (int i = 0; i < verly.entities[k]->points.size(); i++) {
+      auto entity = verly.entities[k];
+      auto point = &entity->points.at(i);
       int dist = point->pos->Distance(this->mouse);
       if (dist < d) {
         this->dragPoint = point;
-        this->hoveredEntity = (Entity*)entity;
+        this->hoveredEntity = entity;
       }
     }
   }
