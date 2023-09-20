@@ -7,8 +7,13 @@
 #include "instrumentor.hpp"
 
 Verly::Verly() {
+	this->renderer = new VerlyRenderer();
   this->entities = {};
 	this->iterations = VERLY_ITERATIONS;
+}
+
+void Verly::setRenderer(VerlyRenderer& renderer) {
+  this->renderer = &renderer;
 }
 
 void Verly::addEntity(Entity &entity) {
@@ -27,7 +32,7 @@ void Verly::update() {
 
 void Verly::draw() {
   for (int i = 0; i < this->entities.size(); i++) {
-    this->entities[i]->draw();
+    this->entities[i]->draw(*this->renderer);
   }
 }
 

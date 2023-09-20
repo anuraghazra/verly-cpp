@@ -1,6 +1,7 @@
 #pragma once
 #include "stick.hpp"
 #include "particle.hpp"
+#include "renderer.hpp"
 #include <memory>
 
 class Stick {
@@ -15,5 +16,5 @@ public:
 	float length;
 
 	void update();
-	void draw();
+	void draw(VerlyRenderer& renderer);
 };

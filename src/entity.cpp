@@ -2,6 +2,7 @@
 #include "entity.hpp"
 #include "particle.hpp"
 #include "stick.hpp"
+#include "renderer.hpp"
 #include <memory>
 #include <algorithm>
 #include "instrumentor.hpp"
@@ -49,12 +50,12 @@ void Entity::update(int iterations) {
   }
 }
 
-void Entity::draw() {
+void Entity::draw(VerlyRenderer& renderer) {
   for (int i = 0; i < this->points.size(); i++)  {
-    this->points[i].draw();
+    this->points[i].draw(renderer);
   }
   for (int k = 0; k < this->sticks.size(); k++)  {
-    this->sticks[k].draw();
+    this->sticks[k].draw(renderer);
   }
   // this->drawPointIndices();
 }

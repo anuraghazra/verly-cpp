@@ -4,6 +4,7 @@
 #include <memory>
 
 class Stick;
+class VerlyRenderer;
 
 class Particle {
 public:
@@ -22,7 +23,7 @@ public:
 
 	void applyForce(raylib::Vector2 force);
 	void update();
-	void draw();
+	void draw(VerlyRenderer& renderer);
 	void constrain();
 };
 

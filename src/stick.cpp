@@ -1,5 +1,6 @@
 #include "constants.hpp"
 #include "stick.hpp"
+#include "renderer.hpp"
 #include <memory>
 
 Stick::Stick(Particle& p1, Particle& p2): startPoint(&p1), endPoint(&p2) {
@@ -34,12 +35,6 @@ void Stick::update() {
 	}
 }
 
-void Stick::draw() {
-	DrawLine(
-		this->startPoint->pos->x,
-		this->startPoint->pos->y,
-		this->endPoint->pos->x,
-		this->endPoint->pos->y,
-		this->color
-	);
+void Stick::draw(VerlyRenderer& renderer) {
+	renderer.drawStick(*this);
 }
