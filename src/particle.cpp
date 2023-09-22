@@ -1,6 +1,6 @@
 #include "constants.hpp"
 #include "particle.hpp"
-#include "renderer.hpp"
+#include "renderer/renderer.hpp"
 #include <raylib-cpp.hpp>
 #include <iostream>
 

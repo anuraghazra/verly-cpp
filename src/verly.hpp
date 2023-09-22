@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include "entity.hpp"
-#include "renderer.hpp"
+#include "renderer/renderer.hpp"
 
 class Verly {
 public:

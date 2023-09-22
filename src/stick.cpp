@@ -1,6 +1,6 @@
 #include "constants.hpp"
 #include "stick.hpp"
-#include "renderer.hpp"
+#include "renderer/renderer.hpp"
 #include <memory>
 
 Stick::Stick(Particle& p1, Particle& p2): startPoint(&p1), endPoint(&p2) {

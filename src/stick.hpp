@@ -1,7 +1,7 @@
 #pragma once
 #include "stick.hpp"
 #include "particle.hpp"
-#include "renderer.hpp"
+#include "renderer/renderer.hpp"
 #include <memory>
 
 class Stick {
