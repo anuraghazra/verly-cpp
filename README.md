@@ -2,11 +2,14 @@
 
 [Verly.js](https://github.com/anuraghazra/verly.js) C++ Port
 
+### Roadmap
 
-TODO:
-
-- Decouple renderer from physics engine
-
+- [x] Decouple renderer from physics engine
+- [ ] WASM build - run on web
+- [ ] Release has a static library 
+- [ ] Documentation
+- [ ] Examples
+- [ ] Improve project structure  
 -------
 
 #### Raylib C++ Starter
