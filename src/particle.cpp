@@ -1,5 +1,6 @@
 #include "constants.hpp"
 #include "particle.hpp"
+#include "renderer/renderer.hpp"
 #include <raylib-cpp.hpp>
 #include <iostream>
 
@@ -59,7 +60,6 @@ void Particle::applyForce(raylib::Vector2 force) {
 	this->pos->y += force.y;
 }
 
-void Particle::draw() {
-	unsigned char vel = Clamp(this->pos->Distance(*this->oldPos) * 50, 0, 255);
-	DrawCircle(this->pos->x, this->pos->y, this->radius, Color{(unsigned char)(vel/20), vel, 155, 255});
+void Particle::draw(VerlyRenderer& renderer) {
+	renderer.drawPoint(*this);
 }

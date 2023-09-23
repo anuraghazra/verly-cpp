@@ -1,10 +1,12 @@
 #pragma once
 #include <vector>
 #include "entity.hpp"
+#include "renderer/renderer.hpp"
 
 class Verly {
 public:
   Verly();
+  VerlyRenderer* renderer;
   std::vector<Entity*> entities;
   int iterations;
 
@@ -17,4 +19,5 @@ public:
   void draw();
   void addEntity(Entity& entity);
   void setIterations(int count);
+  void setRenderer(VerlyRenderer& renderer);
 };

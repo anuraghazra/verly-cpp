@@ -1,4 +1,5 @@
 #pragma once
+#include "renderer/renderer.hpp"
 #include "particle.hpp"
 #include "stick.hpp"
 #include <iostream>
@@ -22,6 +23,6 @@ public:
   Stick* createStick(int from, int to);
   Stick* addStick(Stick stick);
   void update(int iterations);
-  void draw();
+  void draw(VerlyRenderer& renderer);
   void drawPointIndices();
 };
