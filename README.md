@@ -10,6 +10,14 @@
 - [ ] Documentation
 - [ ] Examples
 - [ ] Improve project structure  
+- [ ] Different Kinds Constraints
+  - [x] Distance Constraint
+  - [ ] Angle Constraint
+  - [ ] Soft Body Constraints
+  - [ ] Breakable Constraints
+  - [ ] Range Constraints / MinMax Constraint
+- [ ] Collisions? (Unsure if i should do this)
+  - [ ] Circle to Circle (this can be achieved with a MinMaxConstraint)
 -------
 
 #### Raylib C++ Starter
