@@ -8,8 +8,8 @@ class Mouse {
 public:
   Mouse();
 
-  Vector2 mouse;
-  const Particle* dragPoint;
+  raylib::Vector2 mouse;
+  Particle* dragPoint;
   Entity* hoveredEntity;
   void update(Verly& verly);
 

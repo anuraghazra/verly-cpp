@@ -25,5 +25,6 @@ public:
 	void update();
 	void draw(VerlyRenderer& renderer);
 	void constrain();
+	void setRadius(int radius);
 };
 

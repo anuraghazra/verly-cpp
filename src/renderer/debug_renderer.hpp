@@ -3,7 +3,7 @@
 #include "../particle.hpp"
 #include "../stick.hpp"
 
-#define RENDER_DEBUG_INDEX_RENDER 1
+#define RENDER_DEBUG_INDEX_RENDER 0
 #define RENDER_POINT_VELOCITY 0
 
 class DebugRenderer : public VerlyRenderer {

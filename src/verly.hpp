@@ -8,6 +8,7 @@ public:
   Verly();
   VerlyRenderer* renderer;
   std::vector<Entity*> entities;
+  std::vector<AttractionBehaviour*> behaviours;
   int iterations;
 
   static Entity createBox(int x, int y, int w, int h);
@@ -18,6 +19,7 @@ public:
   void removePoint(const Particle* point, Entity* hoveredEntity);
   void draw();
   void addEntity(Entity& entity);
+  void resolveBehaviour(AttractionBehaviour& behaviour);
   void setIterations(int count);
   void setRenderer(VerlyRenderer& renderer);
 };

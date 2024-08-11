@@ -63,3 +63,7 @@ void Particle::applyForce(raylib::Vector2 force) {
 void Particle::draw(VerlyRenderer& renderer) {
 	renderer.drawPoint(*this);
 }
+
+void Particle::setRadius(int radius) {
+	this->radius = radius;
+}

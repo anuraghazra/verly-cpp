@@ -8,6 +8,7 @@
 
 Verly::Verly() {
 	this->renderer = new VerlyRenderer();
+	this->behaviours = {};
   this->entities = {};
 	this->iterations = VERLY_ITERATIONS;
 }
@@ -18,6 +19,12 @@ void Verly::setRenderer(VerlyRenderer& renderer) {
 
 void Verly::addEntity(Entity& entity) {
   this->entities.push_back(&entity);
+}
+
+void Verly::resolveBehaviour(AttractionBehaviour& behaviour) {
+ for (int i = 0; i < this->entities.size(); i++) {
+    this->entities[i]->resolveBehaviour(&behaviour);
+  }
 }
 
 void Verly::setIterations(int count) {
