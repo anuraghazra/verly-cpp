@@ -3,6 +3,7 @@
 #include "particle.hpp"
 #include "stick.hpp"
 #include "renderer/renderer.hpp"
+#include "behaviours/attraction.hpp"
 #include <memory>
 #include <algorithm>
 #include "instrumentor.hpp"
@@ -47,6 +48,12 @@ void Entity::update(int iterations) {
     for (int k = 0; k < this->points.size(); k++)  {
       this->points[k].constrain();
     }
+  }
+}
+
+void Entity::resolveBehaviour(AttractionBehaviour *behaviour) {
+  for (int i = 0; i < this->points.size(); i++) {
+    behaviour->resolve(&this->points[i]);
   }
 }
 

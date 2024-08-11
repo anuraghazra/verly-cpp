@@ -26,13 +26,13 @@ void AttractionBehaviour::setStrength(float value) {
   this->strength = value;
 }
 
-void AttractionBehaviour::resolve(Particle& to) {
-  auto delta = this->attractor->Subtract(*to.pos);
+void AttractionBehaviour::resolve(Particle* to) {
+  auto delta = this->attractor->Subtract(*to->pos);
   auto dist = delta.LengthSqr();
 
   auto magR = this->radius * this->radius;
   if (dist < magR) {
     auto f = normalizeTo(delta, 1 - (dist / magR)).Scale(this->strength);
-    to.applyForce(f);
+    to->applyForce(f);
   }
 }
