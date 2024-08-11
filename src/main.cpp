@@ -1,6 +1,6 @@
 #include <raylib-cpp.hpp>
-#include "scenes/particle-fluid.cpp"
-#include "scenes/basic.cpp"
+#include "scenes/particle-fluid.hpp"
+#include "scenes/basic.hpp"
 
 int main() {
 	SetTargetFPS(120);

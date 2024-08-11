@@ -1,4 +1,3 @@
-
 #include <raylib-cpp.hpp>
 #include <vector>
 #include <iostream>
